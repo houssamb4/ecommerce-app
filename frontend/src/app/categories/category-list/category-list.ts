@@ -3,8 +3,13 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category.model';
 
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-category-list',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './category-list.html',
   styleUrls: ['./category-list.css']
 })

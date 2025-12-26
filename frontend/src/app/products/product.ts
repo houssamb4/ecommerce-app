@@ -1,8 +1,2 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class Product {
-  
-}
+// Deprecated: Use models/product.model.ts instead
+export * from '../models/product.model';

@@ -1,8 +1,3 @@
-import { Injectable } from '@angular/core';
+// Deprecated: Use models/category.model.ts instead
+export * from '../models/category.model';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class Category {
-  
-}

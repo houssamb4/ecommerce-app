@@ -5,12 +5,17 @@ import { CategoryService } from '../../services/category.service';
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
 
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-product-list',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-list.html',
   styleUrls: ['./product-list.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit { 
   products: Product[] = [];
   categories: Category[] = [];
 

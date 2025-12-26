@@ -3,12 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category.model';
 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-category-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './category-form.html',
   styleUrls: ['./category-form.css']
 })
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent implements OnInit { 
   category: Category = { name: '', description: '' };
   isEditMode = false;
   categoryId?: number;

@@ -5,12 +5,18 @@ import { CategoryService } from '../../services/category.service';
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
 
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-product-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './product-form.html',
   styleUrls: ['./product-form.css']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit { 
   product: Product = { name: '', price: 0, stock: 0, categoryId: 0 };
   categories: Category[] = [];
   isEditMode = false;
