@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h2>Products List</h2>
+  
+  <div class="mb-3">
+    <button class="btn btn-primary" routerLink="/products/add">Add New Product</button>
+    <button class="btn btn-secondary ms-2" routerLink="/categories">Go to Categories</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price (MAD)</th>
+        <th>Stock</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency:'MAD ' }}</td>
+        <td>{{ product.stock }}</td>
+        <td>{{ getCategoryName(product.categoryId) }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="editProduct(product.id!)">
+            Edit
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

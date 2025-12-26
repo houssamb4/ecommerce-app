@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2>Categories List</h2>
+  
+  <div class="mb-3">
+    <button class="btn btn-primary" routerLink="/categories/add">Add New Category</button>
+    <button class="btn btn-secondary ms-2" routerLink="/products">Go to Products</button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="editCategory(category.id!)">
+            Edit
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

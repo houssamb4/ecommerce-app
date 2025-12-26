@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2>{{ isEditMode ? 'Edit Category' : 'Add New Category' }}</h2>
+  
+  <form (ngSubmit)="saveCategory()" #categoryForm="ngForm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name *</label>
+      <input type="text" class="form-control" id="name" 
+             [(ngModel)]="category.name" name="name" 
+             required minlength="3" #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+        <div *ngIf="name.errors?.['required']">Name is required</div>
+        <div *ngIf="name.errors?.['minlength']">Name must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" 
+                [(ngModel)]="category.description" name="description" 
+                rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" routerLink="/categories">
+      Cancel
+    </button>
+  </form>
+</div>

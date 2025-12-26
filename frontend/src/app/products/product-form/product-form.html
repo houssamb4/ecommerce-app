@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
+  
+  <form (ngSubmit)="saveProduct()" #productForm="ngForm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name *</label>
+      <input type="text" class="form-control" id="name" 
+             [(ngModel)]="product.name" name="name" 
+             required minlength="3" #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+        <div *ngIf="name.errors?.['required']">Name is required</div>
+        <div *ngIf="name.errors?.['minlength']">Name must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price (MAD) *</label>
+      <input type="number" class="form-control" id="price" 
+             [(ngModel)]="product.price" name="price" 
+             required min="0" step="0.01" #price="ngModel">
+      <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">
+        <div *ngIf="price.errors?.['required']">Price is required</div>
+        <div *ngIf="price.errors?.['min']">Price must be positive</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="stock" class="form-label">Stock *</label>
+      <input type="number" class="form-control" id="stock" 
+             [(ngModel)]="product.stock" name="stock" 
+             required min="0" #stock="ngModel">
+      <div *ngIf="stock.invalid && (stock.dirty || stock.touched)" class="text-danger">
+        <div *ngIf="stock.errors?.['required']">Stock is required</div>
+        <div *ngIf="stock.errors?.['min']">Stock must be positive</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category *</label>
+      <select class="form-control" id="category" 
+              [(ngModel)]="product.categoryId" name="categoryId" 
+              required #category="ngModel">
+        <option value="">Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+      <div *ngIf="category.invalid && (category.dirty || category.touched)" class="text-danger">
+        Category is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" routerLink="/products">
+      Cancel
+    </button>
+  </form>
+</div>
