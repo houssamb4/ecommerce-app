@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+/* Light / clean global theme */
+:root{
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --accent: #0d6efd; /* bootstrap primary */
+  --muted: #6c757d;
+  --card-bg: #ffffff;
+  --shadow: 0 6px 18px rgba(22, 27, 34, 0.06);
+  --text: #111827;
+  --muted-text: #6b7280;
+  --border: #e9ecef;
+}
+
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* App main layout */
+.main{padding:3rem 1rem;background:transparent}
+.content{max-width:1100px;margin:0 auto;display:flex;gap:2rem;align-items:flex-start}
+.left-side{flex:1}
+.right-side{width:320px}
+
+/* Hero text */
+.left-side h1{font-size:2.25rem;color:var(--text);margin-bottom:0.25rem}
+.left-side p.lead{color:var(--muted-text);margin-bottom:0.75rem}
+
+/* Stats cards */
+.stats .stat-card{background:var(--card-bg);border:1px solid var(--border);min-width:120px;box-shadow:var(--shadow)}
+.stat-value{color:var(--accent)}
+
+/* Buttons */
+.btn-primary{background:var(--accent);border:0;color:#fff}
+.btn-outline-light{color:var(--text);border:1px solid var(--border);background:transparent}
+.btn{transition:transform .12s ease, box-shadow .12s ease}
+.btn:hover{transform:translateY(-2px)}
+
+/* Navbar */
+.navbar{background:var(--surface);border-bottom:1px solid var(--border)}
+.navbar .navbar-brand{font-weight:700;color:var(--text)}
+.navbar .nav-link{color:var(--muted-text)}
+.navbar .nav-link:hover{color:var(--accent)}
+
+/* Table */
+.table{background:transparent}
+.table td,.table th{color:var(--text);border-top:1px solid #f1f3f5}
+.table thead th{color:var(--muted-text);background:transparent}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:var(--surface);color:var(--muted-text)}
+
+/* Small utilities */
+.badge{background:#f1f3f5;color:var(--text)}
+
+/* Responsive */
+@media(max-width:850px){
+  .content{flex-direction:column;gap:1rem}
+  .right-side{width:auto}
+  .stats{justify-content:flex-start}
+}
+
