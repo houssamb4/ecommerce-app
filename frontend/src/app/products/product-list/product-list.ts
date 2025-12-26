@@ -17,7 +17,10 @@ import { RouterModule } from '@angular/router';
 })
 export class ProductListComponent implements OnInit { 
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   categories: Category[] = [];
+  searchTerm: string = '';
+  loading = false;
 
   constructor(
     private productService: ProductService,
@@ -31,32 +34,56 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
+    this.loading = true;
     this.productService.list().subscribe(
       data => {
         this.products = data;
+        this.filteredProducts = [...this.products];
         this.loadCategoryNames();
+        this.loading = false;
       },
-      error => console.error('Error loading products:', error)
+      error => {
+        console.error('Error loading products:', error);
+        this.loading = false;
+      }
     );
   }
 
   loadCategories(): void {
     this.categoryService.list().subscribe(
-      data => this.categories = data,
+      data => {
+        this.categories = data;
+        this.loadCategoryNames();
+      },
       error => console.error('Error loading categories:', error)
     );
   }
 
   loadCategoryNames(): void {
+    // ensure category names are attached to products
     this.products.forEach(product => {
       const category = this.categories.find(c => c.id === product.categoryId);
       product.categoryName = category ? category.name : 'Unknown';
     });
+    // update filtered view in case categories arrived after products
+    this.applyFilter();
   }
 
   getCategoryName(categoryId: number): string {
     const category = this.categories.find(c => c.id === categoryId);
     return category ? category.name : 'Unknown';
+  }
+
+  applyFilter(): void {
+    const q = this.searchTerm?.trim().toLowerCase();
+    if (!q) {
+      this.filteredProducts = [...this.products];
+      return;
+    }
+    this.filteredProducts = this.products.filter(p =>
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.categoryName || '').toLowerCase().includes(q)
+    );
   }
 
   editProduct(id: number): void {

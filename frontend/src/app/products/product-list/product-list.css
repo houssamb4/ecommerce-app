@@ -1,0 +1,4 @@
+/* Small UI polish for product list */
+.table td, .table th { vertical-align: middle; }
+.badge { font-size: 0.85em; }
+input[type="search"].form-control { display: inline-block; }
