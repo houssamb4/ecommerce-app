@@ -1,1 +1,1 @@
-# ecommerce-app
+# E-commerce Application - Spring Boot & Angular
