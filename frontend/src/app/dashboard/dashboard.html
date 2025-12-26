@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
       <h1 class="mb-0">Dashboard</h1>
-      <p class="text-muted small">Overview of products and categories</p>
+      <p class="text-muted small">Overview of your store</p>
     </div>
     <div>
       <button class="btn btn-outline-secondary me-2" (click)="refresh()">Refresh</button>
@@ -15,50 +15,88 @@
     <div class="mt-2">Loading…</div>
   </div>
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <div class="card p-3">
-        <div class="h6 text-muted">Products</div>
-        <div class="h2 mt-1">{{ totalProducts ?? '—' }}</div>
+  <div class="kpi-grid mb-4">
+    <div class="kpi-card">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-meta">
+        <div class="kpi-label">Products</div>
+        <div class="kpi-value">{{ totalProducts ?? '—' }}</div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card p-3">
-        <div class="h6 text-muted">Categories</div>
-        <div class="h2 mt-1">{{ totalCategories ?? '—' }}</div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon">🗂️</div>
+      <div class="kpi-meta">
+        <div class="kpi-label">Categories</div>
+        <div class="kpi-value">{{ totalCategories ?? '—' }}</div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card p-3">
-        <div class="h6 text-muted">Low stock</div>
-        <div class="h2 mt-1">{{ lowStockCount ?? '—' }}</div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon">⚠️</div>
+      <div class="kpi-meta">
+        <div class="kpi-label">Low stock</div>
+        <div class="kpi-value">{{ lowStockCount ?? '—' }}</div>
+      </div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon">🕒</div>
+      <div class="kpi-meta">
+        <div class="kpi-label">Recent</div>
+        <div class="kpi-value">{{ recentProducts.length }}</div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Recent products</h5>
-      <div *ngIf="recentProducts.length === 0" class="text-muted">No recent products.</div>
-      <div *ngIf="recentProducts.length">
-        <table class="table mb-0">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Category</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let p of recentProducts">
-              <td>{{ p.name }}</td>
-              <td>{{ p.price | currency:'MAD ' }}</td>
-              <td>{{ p.stock }}</td>
-              <td>{{ p.categoryName || '—' }}</td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Sales / Inventory (placeholder)</h5>
+          <div class="chart-placeholder">Chart will appear here</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Recent products</h5>
+          <div *ngIf="recentProducts.length === 0" class="text-muted">No recent products.</div>
+          <div *ngIf="recentProducts.length">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of recentProducts">
+                  <td>{{ p.name }}</td>
+                  <td>{{ p.price | currency:'MAD ' }}</td>
+                  <td>{{ p.stock }}</td>
+                  <td>{{ p.categoryName || '—' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card mb-3 p-3 quick-actions">
+        <h6 class="mb-3">Quick actions</h6>
+        <a class="btn btn-outline-primary w-100 mb-2" routerLink="/products/add">Add product</a>
+        <a class="btn btn-outline-secondary w-100" routerLink="/categories/add">Add category</a>
+      </div>
+
+      <div class="card p-3">
+        <h6 class="mb-3">Notifications</h6>
+        <div *ngIf="lowStockCount && lowStockCount > 0" class="text-warning">{{ lowStockCount }} products with low stock.</div>
+        <div *ngIf="!lowStockCount">All stocks look good.</div>
       </div>
     </div>
   </div>

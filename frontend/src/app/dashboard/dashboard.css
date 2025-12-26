@@ -1,3 +1,22 @@
 .card{border:1px solid var(--border);box-shadow:var(--shadow)}
 .card .card-body{padding:1rem}
 .table th, .table td{vertical-align:middle}
+
+/* KPI grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.25rem}
+.kpi-card{display:flex;gap:1rem;align-items:center;padding:1rem;border-radius:8px;background:var(--card-bg);border:1px solid var(--border);box-shadow:var(--shadow)}
+.kpi-icon{font-size:1.6rem}
+.kpi-meta .kpi-label{font-size:0.85rem;color:var(--muted-text)}
+.kpi-meta .kpi-value{font-size:1.45rem;font-weight:700}
+
+.chart-placeholder{height:220px;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted-text);background:var(--card-bg)}
+
+.quick-actions .btn{justify-content:flex-start}
+
+@media (max-width: 992px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media (max-width: 576px){
+  .kpi-grid{grid-template-columns:repeat(1,1fr)}
+}
